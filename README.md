@@ -10,11 +10,11 @@ Guardrails: safety checks jo sab kuch control mein rakhte hain.
 
 Yeh sab mil kar complex AI workflows banate hain, aur tracing feature se aap dekh sakte hain ke app ke andar kya ho raha hai. 
 
-Why Use the Agents SDK? 
+# Why Use the Agents SDK? 
 
 OpenAI Agents SDK do main goals ke sath bana hai: 
 
-Simple but Powerful: itna simple ke seekhna asaan ho, lekin features itne helpful ho ke kaam asaani se ho jayein. 
+###### Simple but Powerful: itna simple ke seekhna asaan ho, lekin features itne helpful ho ke kaam asaani se ho jayein. 
 
 Flexible: default setting mein bhi achha kaam karta hai, aur aap apni zarurat ke mutabiq isse customize kar sakte hain. 
 
