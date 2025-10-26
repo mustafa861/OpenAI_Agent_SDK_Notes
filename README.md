@@ -14,7 +14,7 @@ Yeh sab mil kar complex AI workflows banate hain, aur tracing feature se aap dek
 
 OpenAI Agents SDK do main goals ke sath bana hai: 
 
-###### Simple but Powerful: itna simple ke seekhna asaan ho, lekin features itne helpful ho ke kaam asaani se ho jayein. 
+Simple but Powerful: itna simple ke seekhna asaan ho, lekin features itne helpful ho ke kaam asaani se ho jayein. 
 
 Flexible: default setting mein bhi achha kaam karta hai, aur aap apni zarurat ke mutabiq isse customize kar sakte hain. 
 
@@ -32,7 +32,7 @@ Function Tools: koi bhi Python function agent ke liye ek tool ban jata hai.
 
 Tracing: aapko step-by-step process dikhata hai ke agents kya kar rahe hain. 
 
-Running Agents 
+# Running Agents 
 
 Jab aap OpenAI Agents SDK mein kisi agent ko “run” karte hain, to aap asal mein aik AI assistant ko activate kar rahe hote hain jo LLM (Large Language Model) par based hota hai. Yeh agent diye gaye input ko process karta hai aur jawab ya koi kaam perform karta hai. 
 
@@ -46,11 +46,11 @@ Runner.run_streamed(): real-time updates deta hai jab agent sochta aur jawab ban
 
 Iska core system agent loop ke zariye kaam karta hai — agent pehle sochta hai, phir koi action leta hai (jaise tool use karna ya task handoff karna), aur yeh process tab tak chalta hai jab tak final output mil jaye ya koi limit tak pohonch jaye. 
 
-Ways to Run an Agent 
+#Ways to Run an Agent 
 
 The Runner class provides three primary methods to run an agent, each tailored to specific use cases: 
 
-1. Runner.run() 
+## 1. Runner.run() 
 
 Type: Asynchronous (async) 
 Returns: RunResult object jab agent apna kaam mukammal kar leta hai. 
