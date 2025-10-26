@@ -57,21 +57,21 @@ Returns: RunResult object jab agent apna kaam mukammal kar leta hai.
 Use Case: Jab aap chahte hain ke agent background mein kaam kare aur baqi code rukay bina chalta rahe — jaise web apps ya multi-tasking environments mein. 
 How It Works: Yeh method agent ko asynchronously start karta hai, jisse code aage chalta rehta hai jab agent input process kar raha hota hai. Jab result ready ho jaye, aap await use karke usay hasil kar sakte hain. 
 
-2. Runner.run_sync() 
+## 2. Runner.run_sync() 
 
 Type: Synchronous (sync) 
 Returns: RunResult object jab agent ka kaam mukammal ho jata hai. 
 Use Case: Aise simple scripts ke liye behtareen jahan aap chahte hain ke agent ka jawab    milne tak code rukay rahe — async handle karne ki zarurat nahi. 
 How It Works: Yeh agent ko run karta hai aur execution tab tak block rehta hai jab tak task complete na ho. Andar se yeh Runner.run() ka use karta hai, lekin async logic ko khud manage karke process ko simple bana deta hai. 
 
-3. Runner.run_streamed() 
+## 3. Runner.run_streamed() 
 
 Type: Asynchronous (async) 
 Returns: RunResultStreaming object jo agent ke kaam karte waqt real-time updates deta    hai. 
 Use Case: Aise applications ke liye best jahan progress ya partial results dikhane ki zarurat ho — jaise chat interfaces mein streaming text output. 
 How It Works: Agent streaming mode mein chalta hai aur task poora hone ka intezar kiye bagair har event (jaise text chunks ya tool updates) turant bhejta rehta hai. 
 
-The Agent Loop: How It Works 
+# The Agent Loop: How It Works 
 
 Running an agent ka main hissa agent loop hota hai — yeh aik cycle hai jo Runner manage karta hai aur agent ko final output tak pohonchata hai. Iska step-by-step kaam kuch is tarah hota hai: 
 
@@ -101,7 +101,7 @@ Agar Handoff ho: current agent se naya agent switch hota hai, aur process dobara
 Termination: 
 Yeh loop tab tak chalta rehta hai jab tak final output na mil jaye, ya maximum turns limit (max_turns) cross na ho jaye — agar limit exceed ho jaye to MaxTurnsExceeded exception throw hoti hai taake infinite loop na banay. 
 
-Key Mechanics 
+# Key Mechanics 
 
 Final Output Definition: Output “final” tab hota hai jab LLM directly text ya structured response de (agar koi optional output_type diya gaya ho to uske mutabiq) aur koi tool call na kare. 
 
@@ -109,7 +109,7 @@ Tools: Yeh aisi functions hote hain jinhein agent use kar sakta hai — jaise AP
 
 Handoffs: Yeh feature agent ko allow karta hai ke wo task kisi specialized agent ko transfer kare. Is se loop ke dauran hi active agent smoothly switch ho jata hai bina process rukay. 
 
-Customizing Runs with run_config 
+# Customizing Runs with run_config 
 
 Aap run_config parameter use karke agent run ke global settings customize kar sakte hain. Mashhoor options yeh hain: 
 
@@ -125,7 +125,7 @@ workflow_name: Run ko ek naam deta hai taake dashboard mein tracking asaan ho.
 
 Yeh settings aapko agent ke behavior aur monitoring par poora control deti hain. 
 
-Multi-Turn Conversations 
+# Multi-Turn Conversations 
 
 Har run method ka call aik “turn” ko represent karta hai conversation mein: 
 
@@ -135,7 +135,7 @@ Next Turn: Pehle wale output ko RunResult.to_input_list() ke zariye input list m
 
 Yeh process context ko har turn mein maintain karta hai, jisse interactive chats aur workflows possible hote hain. 
 
-Potential Exceptions 
+# Potential Exceptions 
 
 Agent run karte waqt kuch errors (exceptions) aa sakte hain jo problems ko signal karte hain: 
 
@@ -151,9 +151,9 @@ In errors ko handle karna zaroori hai taake application stable aur reliable rahe
 
 OpenAI Agents SDK mein agent run karna matlab hai aik AI assistant launch karna jo input ko LLM reasoning, tools aur agent handoffs ke dynamic loop se process karta hai. Runner.run(), Runner.run_sync(), aur Runner.run_streamed() ka use karke aap apni zarurat ke mutabiq asynchronous, synchronous, ya streaming mode select kar sakte hain. Yeh process agent loop ke zariye chalti hai, jise run_config se customize kar sakte hain, aur multi-turn conversations ke liye support bhi deti hai. 
 
-Streaming 
+# Streaming 
 
-What is Streaming? 
+## What is Streaming? 
 
 Streaming ka matlab hai ke agent kaam karte waqt hi updates milti rehti hain, poora task khatam hone ka intezar nahi karna padta. Yeh bilkul aise hai jaise aap live video dekh rahe ho bajaye poori movie download karne ke. 
 
@@ -165,7 +165,7 @@ Efficiency: Lambi tasks ke dauran app block nahi hoti.
 
 Debugging: Step-by-step agent ke actions dekhne ki suvidha milti hai. 
 
-How Does Streaming Work? 
+## How Does Streaming Work? 
 
 Streaming use karne ke liye aap Runner.run_streamed() method call karte hain, jo RunResultStreaming object return karta hai. Yeh object apne result.stream_events() method ke zariye asynchronous stream of events deta hai. Har event aik StreamEvent hota hai, aur yeh mukhtalif types mein aate hain: 
 
@@ -177,7 +177,7 @@ Agent Update Events: Jab active agent change hota hai — jaise handoff ke daura
 
 Aap inn events ko asynchronously iterate kar sakte hain aur har event ke aane par response de sakte hain. 
 
-Why Use Streaming? 
+## Why Use Streaming? 
 
 Real-Time Feedback: Users ko turant progress dikhakar unhe engaged rakhta hai. 
 
@@ -185,9 +185,9 @@ Non-Blocking: App ko allow karta hai ke agent ke kaam karte waqt bhi doosre task
 
 Visibility: Agent ke real-time actions dikhakar debugging asaan banata hai. 
 
-Tracing 
+# Tracing 
 
-What is Tracing? 
+## What is Tracing? 
 
 Tracing OpenAI Agents SDK ka aik built-in system hai jo har agent run ke dauran hone wale tamam important actions ko record karta hai. Yeh ek tarah ka flight recorder hota hai jo detailed activity log maintain karta hai, jaise LLM calls, tool executions, guardrail checks, aur agent handoffs. 
 
@@ -201,7 +201,7 @@ Tracing default taur par enabled hoti hai, lekin agar chahein to aap environment
 
 Iska faida yeh hai ke aap apne agents ke workflow ko debug, optimize, aur monitor kar sakte hain. Tracing se aapko performance aur behavior ke bare mein precise insights milte hain, aur sab kuch OpenAI Dashboard par visually dekhne ko milta hai. 
 
-How Does Tracing Work? 
+## How Does Tracing Work? 
 
 Tracing OpenAI Agents SDK ke do main concepts par based hoti hai: Traces aur Spans. 
 
@@ -215,7 +215,7 @@ Data: Ismein inputs, outputs, ya kisi bhi relevant information ka detail hota ha
 
 In dono concepts ke through, tracing agent ke workflow ka poora structure dikhata hai, jisse debugging, optimization, aur monitoring asaan hoti hai. 
 
-Default Tracing Behavior 
+# Default Tracing Behavior 
 
 Tracing OpenAI Agents SDK mein default taur par enabled hoti hai aur agent ke workflow ke tamam important processes ko capture karti hai. SDK in tamam activities ko alag-alag spans ke zariye track karta hai, jinhein ek single trace ke andar organize kiya jata hai. 
 
@@ -237,7 +237,7 @@ TranscriptionSpan (speech‑to‑text) aur SpeechSpan (text‑to‑speech): Voic
 
 Sabhi spans aur traces automatically OpenAI ke backend par bheje jaate hain aur OpenAI Dashboard mein visual format mein dekhe ja sakte hain, jahan developers easily debugging, monitoring, aur optimization kar sakte hain. 
 
-Customizing Traces 
+# Customizing Traces 
 
 OpenAI Agents SDK mein tracing ko aap apni zarurat ke mutabiq tweak kar sakte hain. Yeh kuch tareeqe hain: 
 
@@ -270,7 +270,7 @@ Yeh option un cases mein bohot zaroori hoti hai jahan user prompts, confidential
 
 Is tarah tracing useful debugging aur monitoring ke liye active rehti hai, lekin sensitive user data safe aur private rehta hai. 
 
-Custom Trace Processors 
+# Custom Trace Processors 
 
 OpenAI Agents SDK mein tracing system flexible hai, aur aap chahein to apne traces ko OpenAI ke default dashboard ke ilawa kisi aur jagah — jaise apne logging system, monitoring tool, ya third-party observability platform — par bhej sakte hain. 
 
@@ -284,7 +284,7 @@ Agar aap chahte hain ke traces sirf apke custom system par hi bheje jayein (aur 
 
 In methods ki help se aap tracing workflow ko apne infrastructure ke mutabiq customize kar sakte hain — chahe aap apni private analytics setup use kar rahe ho, ya external services jaise Datadog, Phoenix, ya Langfuse. 
 
-Why Use Tracing? 
+# Why Use Tracing? 
 
 Tracing OpenAI Agents SDK ka ek important feature hai jo agent ke workflow ke har step ko detail mein record karta hai. Yeh system development aur production dono environments mein debugging, performance improvement, aur compliance ke liye valuable hota hai. 
 
@@ -296,9 +296,9 @@ Auditing: Har agent action aur user interaction ka accurate record maintain hota
 
 In sab ka visualization OpenAI dashboard mein available hota hai, jahan se developers trace events ko dekh, filter, aur analyze kar sakte hain taake system aur workflows dono ko behtar banaya ja sake. 
 
-Conversational Agents 
+# Conversational Agents 
 
-What Are Conversational Agents? 
+## What Are Conversational Agents? 
 
 Conversational agents aise AI-powered systems hain jo insano ke saath natural aur human-like dialogue karne ke liye design kiye gaye hain. Yeh large language models par based hote hain — jaise OpenAI ke GPT models — jinmein natural language samajhne aur generate karne ki ability hoti hai. 
 
@@ -346,7 +346,7 @@ Yeh loop tab tak chalta hai jab tak user ka poora request complete na ho jaye.
 
 Yeh design conversational agents ko powerful banata hai — jo not only baat karte hain, balki intelligent actions le kar problems solve karne ki capability bhi rakhte hain. 
 
-Multi-Turn Conversations 
+# Multi-Turn Conversations 
 
 Conversational agents multi-turn interactions mein tabhi consistent rahte hain jab wo pehle ke messages ka context yaad rakhte hain. OpenAI Agents SDK is process ko do tareeqon se handle karta hai: manual context preservation aur built-in sessions. 
 
@@ -356,7 +356,7 @@ Lekin agar aapko har turn par manual tracking nahi chahiye, to SDK ka Session sy
 
 Dono approaches ka goal ek hi hai — context ko preserve karke naturally flowing dialogue maintain karna, jahan agent har naye jawab mein pehle ke conversations ko samajh kar coherent aur human-like responses de sake. 
 
-Why Are Conversational Agents Useful? 
+## Why Are Conversational Agents Useful? 
 
 Conversational agents users ke liye interaction ko asaan aur natural banate hain, jahan unhe technology seekhne ki zarurat nahi hoti. Yeh systems human-style dialogue ke zariye communication ko intuitive aur efficient banate hain. 
 
@@ -370,9 +370,9 @@ Task Versatility: Yeh sirf queries ka jawab dene tak limited nahi hote; balki ta
 
 Inn features ke zariye conversational agents ek smart, context-aware assistant ki tarah kaam karte hain jo users ke natural communication pattern ko samajh kar unhe personalized aur efficient responses deta hai. 
 
-Function Tools 
+# Function Tools 
 
-What Are Function Tools? 
+## What Are Function Tools? 
 
 Function tools OpenAI Agents SDK ka integral part hain jo conversational agents ki capabilities ko text generation se aage badhate hain. Yeh agents ko real actions perform karne ki ability dete hain — jaise data retrieve karna, calculations chalana, ya kisi external API ke sath interact karna. 
 
@@ -390,7 +390,7 @@ Yeh tools agent ke workflow mein seamlessly integrate hote hain. Jab agent kisi 
 
 Is approach se agents sirf baat karne wale bots nahi rehte, balki intelligent assistants ban jaate hain jo soch kar kaam karte hain aur practical results deliver karte hain. 
 
-How Do Function Tools Work? 
+## How Do Function Tools Work? 
 
 OpenAI Agents SDK mein jab agent ko koi kaam karna hota hai, to wo apne workflow ke andar automatically sahi tool identify karta hai aur use execute karne ke liye zaruri arguments deta hai. Yeh puri process SDK ke agent loop mein smoothly integrate hoti hai, jisme agent text generation ke saath saath real tasks bhi perform kar sakta hai. 
 
@@ -406,7 +406,7 @@ Agent us output ka use karke apna next step tay karta hai — chahe wo final jaw
 
 Yeh process agent ke loop ka integral part hoti hai, isliye developer ko manually tool management karne ki zarurat nahi padti. Tool usage completely intuitive aur automated hoti hai, jisse agent natural conversation flow ke andar data retrieval, computation, ya system interaction jaise tasks seamlessly handle karta hai. 
 
-Customizing Function Tools 
+# Customizing Function Tools 
 
 OpenAI Agents SDK mein FunctionTool manually define karne ka option un scenarios ke liye diya gaya hai jahan built-in decorators kaafi flexible nahi hote — jaise complex APIs ya databases se connect karna. 
 
@@ -422,7 +422,7 @@ On Invoke: Yeh ek asynchronous function hota hai jo tab execute hota hai jab age
 
 Is approach ka faida yeh hai ke aap SDK ko apne custom business logic ke sath integrate kar sakte hain — jaise internal databases, REST APIs, ya cloud systems. FunctionTool agent ke loop mein seamlessly fit hota hai, jisse conversational flow disturb hue bina external data ya computation kaam perform kiya ja sakta hai. 
 
-Agents as Tools 
+# Agents as Tools 
 
 OpenAI Agents SDK mein aap ek agent ko tool mein convert kar sakte hain, jisse doosre agents usse directly call karke madad le sakte hain — bina conversation ka full control handoff kiye. Is feature ko “Agents-as-Tools” kehte hain. 
 
@@ -440,7 +440,7 @@ Us agent-tool ka output wapas us agent ko milta hai jisse call kiya gaya tha, ji
 
 Yeh design modular AI systems ke liye bohot powerful hai, kyunke isse alag-alag agents apni expertise maintain karte hue cooperative way mein kaam kar sakte hain — bina user ke perspective se conversation flow break kiye. 
 
-Why Are Function Tools Useful? 
+## Why Are Function Tools Useful? 
 
 OpenAI Agents SDK agents ko sirf conversational systems nahi, balki action-oriented AI banata hai — aise systems jo real-world tasks execute kar sakte hain. Yeh design developers ke liye smart, reusable aur scalable agents banana asaan banata hai. 
 
